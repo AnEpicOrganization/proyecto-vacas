@@ -1,4 +1,6 @@
 function doLogin() {
+	waitingDialog.show('Cargando...');
+
 	$.post('app/api/session.php', $('#loginform').serialize(), function(data){
 		try {
 			data = JSON.parse(data);
@@ -19,5 +21,7 @@ function doLogin() {
 			alert('Error: ' + err.message);
 			return;
 		}
+		
+		waitingDialog.hide();
 	});
 }
