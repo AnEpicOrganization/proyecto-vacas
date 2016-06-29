@@ -4,6 +4,6 @@ app.directive('panelMenu', function() {
     scope: {
       info: '='
     },
-    templateUrl: 'app/views/panel_menu.html'
+    templateUrl: 'app/views/directives/panel_menu.html'
   };
 });
