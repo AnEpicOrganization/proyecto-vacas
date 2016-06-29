@@ -6,24 +6,28 @@ app.controller('LoginController', ['$scope', function($scope) {
 	});
 }]);
 
-app.controller('PanelController', ['$scope', function($scope) {
+app.controller('PanelController', ['$scope', 'logged', 'usuarios', function($scope, logged, usuarios) {
+	$scope.usuarios = [];
+
 	waitingDialog.show('Cargando...');
-	$.getJSON('app/api/session.php?action=logged', function(data){
+	logged.success(function(isLogged){
 		waitingDialog.hide();
-		if(!data.logged) {
+		if(!isLogged) {
 			location.hash = "/";
 		}
+
+		usuarios.success(function(data){
+			$scope.usuarios = data;
+		});
 	});
 }]);
 
-app.controller('FichaController', ['$scope', 'ficha', function($scope, ficha) {
+app.controller('FichaController', ['$scope', 'logged', 'ficha', function($scope, logged, ficha) {
 	waitingDialog.show('Cargando...');
-	$.getJSON('app/api/session.php?action=logged', function(data){
+	logged.success(function(isLogged){
 		waitingDialog.hide();
-		if(!data.logged) {
+		if(!isLogged) {
 			location.hash = "/";
 		}
-
-
 	});
 }]);

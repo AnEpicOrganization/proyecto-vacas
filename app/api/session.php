@@ -2,6 +2,7 @@
 require("../include/db.php");
 require("../include/functions.php");
 @session_start();
+header('Content-Type:text/json');
 
 if(!isset($_SESSION['logged'])) $_SESSION['logged'] = false;
 

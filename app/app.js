@@ -7,8 +7,7 @@ app.config(function ($routeProvider) {
 	  templateUrl: 'app/views/login.html' 
 	})
 	.when('/panel', { 
-	  controller: 'PanelController', 
-	  templateUrl: 'app/views/panel.html' 
+	  redirectTo: '/panel/usuarios' 
 	})
 	.when('/panel/usuarios', { 
 	  controller: 'PanelController', 
