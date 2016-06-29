@@ -10,6 +10,22 @@ app.config(function ($routeProvider) {
 	  controller: 'PanelController', 
 	  templateUrl: 'app/views/panel.html' 
 	})
+	.when('/panel/usuarios', { 
+	  controller: 'PanelController', 
+	  templateUrl: 'app/views/panel.html' 
+	})
+	.when('/panel/fichas', { 
+	  controller: 'PanelController', 
+	  templateUrl: 'app/views/fichas.html' 
+	})
+	.when('/panel/fichas/:id', { 
+	  controller: 'FichaController', 
+	  templateUrl: 'app/views/ver_ficha.html' 
+	})
+	.when('/panel/fichas/:id/editar', { 
+	  controller: 'FichaController', 
+	  templateUrl: 'app/views/mod_ficha.html' 
+	})
 	.otherwise({ 
 	  redirectTo: '/' 
 	}); 
