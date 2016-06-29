@@ -24,7 +24,7 @@ app.config(function ($routeProvider, $httpProvider) {
 	  templateUrl: 'app/views/ver_ficha.html' 
 	})
 	.when('/panel/fichas/:id/editar', { 
-	  controller: 'FichaController', 
+	  controller: 'FichaEditController', 
 	  templateUrl: 'app/views/mod_ficha.html' 
 	})
 	.otherwise({ 

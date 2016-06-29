@@ -1,7 +1,7 @@
 app.factory('ficha', ['$http', function($http) {
 	return {
 		get: function(fichaId, callback) {
-			return $http.get('app/api/ficha.php?id='+fichaId)
+			return $http.get('app/api/fichas.php?action=get&id='+fichaId)
 			.success(function(data) {
 				return data;
 			})
@@ -33,6 +33,17 @@ app.factory('ficha', ['$http', function($http) {
 			var postdata = $('#agregar-ficha').serialize();
 			console.log(postdata);
 			return $http.post('app/api/fichas.php?action=agregar', postdata)
+			.success(function(data) {
+				return data;
+			})
+			.error(function(data) {
+				return data;
+			});
+		},
+
+		edit: function(id) {
+			var postdata = $('#editar-ficha').serialize();
+			return $http.post('app/api/fichas.php?action=editar&id='+id, postdata)
 			.success(function(data) {
 				return data;
 			})

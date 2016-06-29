@@ -1,30 +1,36 @@
 <panel-menu></panel-menu>
 
-<div class="container mtop" ng-controller="PanelController">
+<div class="container mtop" ng-controller="FichaEditController">
 	<div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title">Ficha veterinaria DIIO 123345678</h3>
+        <h3 class="panel-title">Ficha veterinaria DIIO {{ficha.diio}}</h3>
       </div>
       <div class="panel-body">
-        <form action="" method="POST" class="form-horizontal" role="form">
+        <form action="javascript:;" method="POST" class="form-horizontal" id="editar-ficha" role="form" ng-submit="editSubmit()">
           <div class="form-group">
             <label for="sexo" class="col-sm-2 control-label">Sexo</label>
             <div class="col-sm-3">
-              <select name="sexo" id="sexo" class="form-control">
-                <option value="M">Macho</option>
-                <option value="H">Hembra</option>
-              </select>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="sexo" value="M" checked="checked" ng-model="ficha.sexo">
+                  Macho
+                </label>&nbsp;&nbsp;
+                <label>
+                  <input type="radio" name="sexo" value="H" ng-model="ficha.sexo">
+                  Hembra
+                </label>
+              </div>
             </div>
 
             <label for="nacimiento" class="col-sm-2 control-label">Nacimiento</label>
             <div class="col-sm-3">
-              <input type="date" name="nacimiento" id="nacimiento" class="form-control">
+              <input type="date" name="nacimiento" id="nacimiento" class="form-control" value="{{ficha.nacimiento}}">
             </div>
           </div>
           <div class="form-group">
             <label for="raza" class="col-sm-2 control-label">Raza</label>
             <div class="col-sm-10">
-              <select id="raza" name="raza">
+              <select id="raza" name="raza" ng-model="ficha.raza">
                 <option></option>
               </select>
             </div>
@@ -32,7 +38,7 @@
           <div class="form-group">
             <label for="descripcion" class="col-sm-2 control-label">Descripción</label>
             <div class="col-sm-10">
-              <textarea id="descripcion" name="descripcion" class="form-control"></textarea>
+              <textarea id="descripcion" name="descripcion" class="form-control">{{ficha.descripcion}}</textarea>
             </div>
           </div>
           <div class="form-group">

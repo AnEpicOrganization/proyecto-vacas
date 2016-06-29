@@ -63,7 +63,6 @@ switch($action) {
 		    throw_error($db->error);
 		}
 
-		if(!isset($data['pagado'])) $data['pagado'] = 0;
 		$stmt->bind_param('sssss', $data['diio'], $data['sexo'], $data['raza'], $data['nacimiento'], $data['descripcion']);
 		$stmt->execute();
 
@@ -90,6 +89,74 @@ switch($action) {
 
 		$db->query("delete from ficha_animal where id_ficha = '$id';");
 		echo '{"message":"Ficha eliminada", "success":true}';
+		break;
+
+	case 'get':
+		if(!isset($_GET['id']) || empty($_GET['id'])) {
+			throw_error('ID no enviado');
+		}
+
+		$id = $db->escape_string(trim($_GET['id']));
+		$res = $db->query("select * from ficha_animal where id_ficha = '$id';");
+
+		if($res->num_rows <= 0) {
+			throw_error('La ficha no existe');
+		}
+
+		echo json_encode($res->fetch_assoc());
+		break;
+
+	case 'editar':
+		if(!isset($_GET['id']) || empty($_GET['id'])) {
+			throw_error('ID no enviado');
+		}
+
+		$id = $db->escape_string(trim($_GET['id']));
+		$res = $db->query("select * from ficha_animal where id_ficha = '$id';");
+
+		if($res->num_rows <= 0) {
+			throw_error('La ficha no existe');
+		}
+
+		require("../include/gump.class.php");
+
+		$gump = new GUMP();
+		$_POST = $gump->sanitize($_POST); // You don't have to sanitize, but it's safest to do so.
+
+		$gump->validation_rules(array(
+		    'sexo'      	=> 'required|contains,H M',
+		    'raza' 			=> 'required',
+		    'nacimiento'    => 'required|date',
+		    'descripcion'   => 'required'
+		));
+
+		$gump->filter_rules(array(
+		    'sexo'			=> 'trim,uppercase',
+		    'raza'			=> 'trim',
+		    'nacimiento'	=> 'trim',
+		    'descripcion'   => 'trim'
+		));
+
+		$data = $gump->run($_POST);
+		if($data === false) {
+		    throw_error(var_export($gump->get_readable_errors(), true));
+		}
+
+		$stmt = $db->prepare(
+		    'UPDATE ficha_animal set sexo = ?, raza = ?, nacimiento = ?, descripcion = ? where id_ficha = ?');
+		   
+		if(!$stmt) {
+		    throw_error($db->error);
+		}
+
+		$stmt->bind_param('ssssi', $data['sexo'], $data['raza'], $data['nacimiento'], $data['descripcion'], $id);
+		$stmt->execute();
+
+		if(!empty($stmt->error)) {
+		    throw_error($stmt->error);
+		}
+
+		echo json_encode(array('message'=>'Ficha editada'));
 		break;
 
 	default:

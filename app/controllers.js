@@ -79,3 +79,39 @@ app.controller('FichaController', ['$scope', 'logged', 'ficha', function($scope,
 		});
 	}
 }]);
+
+app.controller('FichaEditController', ['$scope', 'logged', 'ficha', '$routeParams', function($scope, logged, ficha, $routeParams) {
+	$scope.ficha = null;
+
+	waitingDialog.show('Cargando...');
+	logged.success(function(isLogged){
+		if(!isLogged) {
+			waitingDialog.hide();
+			location.hash = "/";
+		}
+
+		ficha.get($routeParams.id).success(function(data){
+			waitingDialog.hide();
+			$scope.ficha = data;
+		});
+	});
+
+	$scope.editSubmit = function() {
+		waitingDialog.show('Cargando...');
+
+		ficha.edit($routeParams.id).success(function(data){
+			waitingDialog.hide();
+			if('error' in data) {
+				alert('Error: ' + data.error);
+				return;
+			}
+
+			if(!'message' in data) {
+				alert('Error desconocido.');
+				return;
+			}
+
+			alert(data.message);
+		});
+	}
+}]);
