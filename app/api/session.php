@@ -43,7 +43,7 @@ switch($action) {
 
 	case 'logout':
 		session_destroy();
-		header("Location:./");
+		die(json_encode(array('logged' => false)));
 
 		break;
 

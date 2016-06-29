@@ -19,9 +19,9 @@ function doLogin() {
 			}
 		} catch(err) {
 			alert('Error: ' + err.message);
+			waitingDialog.hide();
 			return;
 		}
-		
-		waitingDialog.hide();
+
 	});
 }
