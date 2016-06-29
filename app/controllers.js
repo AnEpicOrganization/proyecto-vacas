@@ -22,8 +22,9 @@ app.controller('PanelController', ['$scope', 'logged', 'usuarios', function($sco
 	});
 }]);
 
-app.controller('FichaController', ['$scope', 'logged', 'ficha', function($scope, logged, ficha) {
+app.controller('FichaController', ['$scope', 'logged', 'ficha', '$routeParams', function($scope, logged, ficha, $routeParams) {
 	$scope.fichas = [];
+	$scope.ficha = null;
 
 	waitingDialog.show('Cargando...');
 	logged.success(function(isLogged){
@@ -32,9 +33,18 @@ app.controller('FichaController', ['$scope', 'logged', 'ficha', function($scope,
 			location.hash = "/";
 		}
 
-		ficha.getAll().success(function(data){
-			$scope.fichas = data;
-		});
+		if('id' in $routeParams && $routeParams.id) {
+			ficha.get($routeParams.id).success(function(data){
+				waitingDialog.hide();
+				$scope.ficha = data;
+			});
+		} else {
+			ficha.getAll().success(function(data){
+				waitingDialog.hide();
+				$scope.fichas = data;
+			});
+		}
+		
 	});
 
 	$scope.addSubmit = function() {

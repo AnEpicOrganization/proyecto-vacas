@@ -1,20 +1,20 @@
 <panel-menu></panel-menu>
 
-<div class="container">
+<div class="container" ng-controller="FichaController">
   <div class="panel panel-primary">
     <div class="panel-body">
-      <h3 class="text-center">Ficha veterinaria DIIO 12334567</h3>
+      <h3 class="text-center">Ficha veterinaria DIIO {{ficha.diio}}</h3>
       <div class="row">
         <div class="col-sm-6 col-sm-offset-3 mtop">
           <table class="table">
             <tbody>
               <tr>
                 <th>Raza</th>
-                <td>xd</td>
+                <td>{{ficha.raza}}</td>
               </tr>
               <tr>
                 <th>Sexo</th>
-                <td>toro hembra</td>
+                <td>{{ficha.sexo | sexo}}</td>
               </tr>
               <tr>
                 <th>Última atención</th>
