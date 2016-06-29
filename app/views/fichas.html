@@ -24,47 +24,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>123456789</td>
-						<td>vaca bovina cuadrupeda mamifera</td>
-						<td>Antonio Banderas</td>
+					<tr ng-repeat="ficha in fichas">
+						<td>{{ficha.diio}}</td>
+						<td>{{ficha.descripcion}}</td>
+						<td><span class="text-muted">(no disponible)</span></td>
 						<td>(descripción breve del estado)</td>
 						<td>
-							<a type="button" class="btn btn-xs btn-primary" href="#/panel/fichas/1">Ver</a>
-							<a type="button" class="btn btn-xs btn-primary" href="#/panel/fichas/1/editar">Editar</a>
-							<button type="button" class="btn btn-xs btn-danger" onclick="confirm('¿Realmente quiere borrar la ficha?')">Borrar</button>
-						</td>
-					</tr>
-					<tr>
-						<td>123456789</td>
-						<td>otra vaca bovina cuadrupeda mamifera</td>
-						<td>Celia Cruz</td>
-						<td>(descripción breve del estado)</td>
-						<td>
-							<a type="button" class="btn btn-xs btn-primary" href="#/panel/fichas/1">Ver</a>
-							<a type="button" class="btn btn-xs btn-primary" href="#/panel/fichas/1/editar">Editar</a>
-							<button type="button" class="btn btn-xs btn-danger" onclick="confirm('¿Realmente quiere borrar la ficha?')">Borrar</button>
-						</td>
-					</tr>
-					<tr>
-						<td>123456789</td>
-						<td>otra vaca bovina cuadrupeda mamifera más</td>
-						<td>El Jona</td>
-						<td>(descripción breve del estado)</td>
-						<td>
-							<a type="button" class="btn btn-xs btn-primary" href="#/panel/fichas/1">Ver</a>
-							<a type="button" class="btn btn-xs btn-primary" href="#/panel/fichas/1/editar">Editar</a>
-							<button type="button" class="btn btn-xs btn-danger" onclick="confirm('¿Realmente quiere borrar la ficha?')">Borrar</button>
-						</td>
-					</tr>
-					<tr>
-						<td>123456789</td>
-						<td>una vaca bovina cuadrupeda mamifera adicional para rellenar</td>
-						<td>Un hombre</td>
-						<td>(descripción breve del estado)</td>
-						<td>
-							<a type="button" class="btn btn-xs btn-primary" href="#/panel/fichas/1">Ver</a>
-							<a type="button" class="btn btn-xs btn-primary" href="#/panel/fichas/1/editar">Editar</a>
+							<a type="button" class="btn btn-xs btn-primary" href="#/panel/fichas/{{ficha.diio}}">Ver</a>
+							<a type="button" class="btn btn-xs btn-primary" href="#/panel/fichas/{{ficha.diio}}/editar">Editar</a>
 							<button type="button" class="btn btn-xs btn-danger" onclick="confirm('¿Realmente quiere borrar la ficha?')">Borrar</button>
 						</td>
 					</tr>
@@ -74,46 +41,61 @@
 	</div>
 
 	<div class="modal fade" id="agregar">
-		<div class="modal-dialog">
+		<form action="" method="POST" class="form-horizontal modal-dialog" role="form">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Agregar usuario</h4>
+					<h4 class="modal-title">Agregar ficha</h4>
 				</div>
 				<div class="modal-body">
-					<form action="" method="POST" class="form-horizontal" role="form">
-						<div class="form-group">
-							<label for="input" class="col-sm-2 control-label">Nombre</label>
-							<div class="col-sm-10">
-								<input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="">
+					<div class="form-group">
+						<label for="inputDiio" class="col-sm-2 control-label">DIIO:</label>
+						<div class="col-sm-10">
+							<input type="text" name="diio" id="inputDiio" class="form-control" value="" required="required" pattern="" title="">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="sexo" class="col-sm-2 control-label">Sexo:</label>
+						<div class="col-sm-10">
+							<div class="radio">
+								<label>
+									<input type="radio" name="sexo" id="sexo" value="" checked="checked">
+									Macho
+								</label>&nbsp;&nbsp;
+								<label>
+									<input type="radio" name="sexo" id="sexo" value="">
+									Hembra
+								</label>
 							</div>
 						</div>
-						<div class="form-group">
-							<label for="input" class="col-sm-2 control-label">RUT</label>
-							<div class="col-sm-10">
-								<input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="">
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="raza" class="col-sm-2 control-label">Raza</label>
+						<div class="col-sm-10">
+							<select id="raza" name="raza">
+								<option></option>
+							</select>
 						</div>
-						<div class="form-group">
-							<label for="input" class="col-sm-2 control-label">Correo</label>
-							<div class="col-sm-10">
-								<input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="">
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="nacimiento" class="col-sm-2 control-label">Nacimiento:</label>
+						<div class="col-sm-10">
+							<input type="date" name="nacimiento" id="nacimiento" class="form-control" value="" required="required" title="">
 						</div>
-						<div class="form-group">
-							<label for="input" class="col-sm-2 control-label">Rol</label>
-							<div class="col-sm-10">
-								<input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="">
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="descripcion" class="col-sm-2 control-label">Descripcion:</label>
+						<div class="col-sm-10">
+							<textarea name="descripcion" id="descripcion" class="form-control" rows="3" required="required"></textarea>
 						</div>
-					</form>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 					<button type="button" class="btn btn-primary">Guardar cambios</button>
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 
 	<footer class="col-sm-6 col-sm-offset-3 text-center">
@@ -122,3 +104,18 @@
 </div>
 
 <script type="text/javascript" src="assets/js/panel.js"></script>
+<script src="assets/js/chosen.jquery.min.js"></script>
+
+<script type="text/javascript">
+var razas = $('#raza');
+$.getJSON('assets/json/razas_vacas.json', function(d) {
+  for(var i = 0; i < d.length; i++) {
+    razas.append('<option>'+d[i]+'</option>');
+  }
+  razas.chosen({
+    width: '100%',
+    no_results_text: "¡No se encontró nada!",
+    placeholder_text_single: "Por favor seleccione una..."
+  });
+});
+</script>

@@ -23,11 +23,17 @@ app.controller('PanelController', ['$scope', 'logged', 'usuarios', function($sco
 }]);
 
 app.controller('FichaController', ['$scope', 'logged', 'ficha', function($scope, logged, ficha) {
+	$scope.fichas = [];
+
 	waitingDialog.show('Cargando...');
 	logged.success(function(isLogged){
 		waitingDialog.hide();
 		if(!isLogged) {
 			location.hash = "/";
 		}
+
+		ficha.getAll().success(function(data){
+			$scope.fichas = data;
+		});
 	});
 }]);

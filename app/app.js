@@ -14,7 +14,7 @@ app.config(function ($routeProvider) {
 	  templateUrl: 'app/views/panel.html' 
 	})
 	.when('/panel/fichas', { 
-	  controller: 'PanelController', 
+	  controller: 'FichaController', 
 	  templateUrl: 'app/views/fichas.html' 
 	})
 	.when('/panel/fichas/:id', { 

@@ -8,6 +8,15 @@ app.factory('ficha', ['$http', function($http) {
 			.error(function(data) {
 				return data;
 			});
+		},
+		getAll: function() {
+			return $http.get('app/api/fichas.php')
+			.success(function(data) {
+				return data;
+			})
+			.error(function(data) {
+				return data;
+			});
 		}
 	}
 }]);
