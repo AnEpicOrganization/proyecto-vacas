@@ -1,0 +1,45 @@
+@media (max-width: 768px) {
+	.navbar-collapse .navbar-nav .navbar-text {
+		margin-right: 15px;
+		margin-left: 15px;
+	}
+}
+
+.has-feedback.has-feedback-left input {
+	padding-left: 31.5px;
+	padding-right: 0;
+}
+.has-feedback.has-feedback-left .form-control-feedback {
+	left: 0;
+}
+
+footer {
+	margin-top: 30px;
+}
+
+.navbar-inverse {
+	background: rgb(10, 25, 56);
+}
+.navbar-inverse .navbar-nav>.active>a,
+.navbar-inverse .navbar-nav>.active>a:focus,
+.navbar-inverse .navbar-nav>.active>a:hover {
+	background: rgb(1, 4, 10);
+}
+
+.navbar .glyphicon {
+    position: relative;
+    top: 2px;
+}
+
+.mtop {
+	margin-top: 15px;
+}
+
+.input-label {
+	text-align: right;
+}
+
+.panel-heading .btn-xs {
+	position: relative;
+	top: -2px;
+}

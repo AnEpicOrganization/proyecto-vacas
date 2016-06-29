@@ -1,0 +1,10 @@
+body {
+	margin-top: 50px;
+}
+
+#tabla-ofertas td:first-child {
+	max-width: 30px;
+}
+#tabla-ofertas td:nth-child(2) {
+	max-width: 300px;
+}
