@@ -6,6 +6,10 @@ app.config(function ($routeProvider) {
 	  controller: 'LoginController', 
 	  templateUrl: 'app/views/login.html' 
 	})
+	.when('/panel', { 
+	  controller: 'PanelController', 
+	  templateUrl: 'app/views/panel.html' 
+	})
 	.otherwise({ 
 	  redirectTo: '/' 
 	}); 

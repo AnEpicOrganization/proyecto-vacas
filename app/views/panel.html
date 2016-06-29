@@ -1,0 +1,218 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Panel</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#fichas">Fichas</a></li>
+                <li><a href="#usuarios">Usuarios</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="javascript:;" onclick="doLogout()">Cerrar sesión</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container" ng-controller="PanelController">
+	<div class="panel panel-primary mtop">
+		<div class="panel-heading">
+			<button type="button" class="btn btn-success btn-xs pull-right" data-toggle="modal" href='#agregar'>
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				Agregar usuario
+			</button>
+			<h3 class="panel-title">
+				Lista de usuarios
+			</h3>
+		</div>
+			
+		<div class="panel-body">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nombre</th>
+						<th>RUT</th>
+						<th>Tipo</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>Antonio Banderas</td>
+						<td>11.111.111-1</td>
+						<td>Administrador</td>
+						<td>
+							<button type="button" class="btn btn-xs btn-primary" data-toggle="modal" href='#editar'>Editar</button>
+							<button type="button" class="btn btn-xs btn-danger" onclick="confirm('¿Realmente quiere borrar al usuario?')">Borrar</button>
+						</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Anthony Flags</td>
+						<td>11.111.112-1</td>
+						<td>Administrador</td>
+						<td>
+							<button type="button" class="btn btn-xs btn-primary" data-toggle="modal" href='#editar'>Editar</button>
+							<button type="button" class="btn btn-xs btn-danger" onclick="confirm('¿Realmente quiere borrar al usuario?')">Borrar</button>
+						</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Joaquín Guebauer</td>
+						<td>11.111.113-1</td>
+						<td>Veterinario</td>
+						<td>
+							<button type="button" class="btn btn-xs btn-primary" data-toggle="modal" href='#editar'>Editar</button>
+							<button type="button" class="btn btn-xs btn-danger" onclick="confirm('¿Realmente quiere borrar al usuario?')">Borrar</button>
+						</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td>Camila Hernández</td>
+						<td>11.111.114-1</td>
+						<td>Veterinario</td>
+						<td>
+							<button type="button" class="btn btn-xs btn-primary" data-toggle="modal" href='#editar'>Editar</button>
+							<button type="button" class="btn btn-xs btn-danger" onclick="confirm('¿Realmente quiere borrar al usuario?')">Borrar</button>
+						</td>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td>Dr. House</td>
+						<td>11.111.115-1</td>
+						<td>Empleado</td>
+						<td>
+							<button type="button" class="btn btn-xs btn-primary" data-toggle="modal" href='#editar'>Editar</button>
+							<button type="button" class="btn btn-xs btn-danger" onclick="confirm('¿Realmente quiere borrar al usuario?')">Borrar</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="modal fade" id="editar">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Editar usuario</h4>
+				</div>
+				<div class="modal-body">
+					<form action="" method="POST" class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="nombres" class="col-sm-2 control-label">Nombres</label>
+							<div class="col-sm-10">
+								<input type="text" name="nombres" id="nombres" class="form-control" value="" required="required" pattern="" title="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="apellidos" class="col-sm-2 control-label">Apellidos</label>
+							<div class="col-sm-10">
+								<input type="text" name="apellidos" id="apellidos" class="form-control" value="" required="required" pattern="" title="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="rut" class="col-sm-2 control-label">RUT</label>
+							<div class="col-sm-10">
+								<input type="text" name="rut" id="rut" class="form-control" value="" required="required" pattern="" title="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="correo" class="col-sm-2 control-label">Correo</label>
+							<div class="col-sm-10">
+								<input type="text" name="correo" id="correo" class="form-control" value="" required="required" pattern="" title="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="input" class="col-sm-2 control-label">Rol</label>
+							<div class="col-sm-10">
+								<select id="rol" name="rol" class="form-control">
+									<option value="1">Uno</option>
+									<option value="2">Dos</option>
+									<option value="3">Tres</option>
+									<option value="4">Cuatro</option>
+								</select>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary">Guardar cambios</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="agregar">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Agregar usuario</h4>
+				</div>
+				<div class="modal-body">
+					<form action="" method="POST" class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="nombres" class="col-sm-2 control-label">Nombres</label>
+							<div class="col-sm-10">
+								<input type="text" name="nombres" id="nombres" class="form-control" value="" required="required" pattern="" title="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="apellidos" class="col-sm-2 control-label">Apellidos</label>
+							<div class="col-sm-10">
+								<input type="text" name="apellidos" id="apellidos" class="form-control" value="" required="required" pattern="" title="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="rut" class="col-sm-2 control-label">RUT</label>
+							<div class="col-sm-10">
+								<input type="text" name="rut" id="rut" class="form-control" value="" required="required" pattern="" title="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="correo" class="col-sm-2 control-label">Correo</label>
+							<div class="col-sm-10">
+								<input type="text" name="correo" id="correo" class="form-control" value="" required="required" pattern="" title="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="input" class="col-sm-2 control-label">Rol</label>
+							<div class="col-sm-10">
+								<select id="rol" name="rol" class="form-control">
+									<option value="1">Uno</option>
+									<option value="2">Dos</option>
+									<option value="3">Tres</option>
+									<option value="4">Cuatro</option>
+								</select>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary">Guardar cambios</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer class="col-sm-6 col-sm-offset-3 text-center">
+		&copy; 2016 Todos los derechos reservados
+	</footer>
+</div>
+
+<script type="text/javascript" src="assets/js/panel.js"></script>

@@ -3,6 +3,8 @@ require("../include/db.php");
 require("../include/functions.php");
 @session_start();
 
+if(!isset($_SESSION['logged'])) $_SESSION['logged'] = false;
+
 $action = 'login';
 if(isset($_GET['action']) && !empty($_GET['action'])) {
 	$action = trim($_GET['action']);
@@ -10,8 +12,7 @@ if(isset($_GET['action']) && !empty($_GET['action'])) {
 
 switch($action) {
 	case 'logged':
-		$logged = isset($_SESSION['logged']) && $_SESSION['logged'];
-		echo json_encode(array("logged" => $logged));
+		echo json_encode(array("logged" => $_SESSION['logged']));
 		break;
 
 	case 'login':
@@ -29,8 +30,15 @@ switch($action) {
 
 		$userdb = $res->fetch_assoc();
 		$passok = check_pass($pass, $userdb['password']);
-		die(json_encode(array('logged' => $passok)));
 
+		if(!$passok) {
+			throw_error("Combinación usuario-contraseña incorrecta");
+		} else {
+			$_SESSION['userdata'] = $userdb;
+			$_SESSION['logged'] = true;
+		}
+
+		die(json_encode(array('logged' => $passok)));
 		break;
 
 	case 'logout':

@@ -2,12 +2,7 @@ html, body {
     height: 100%;
 }
 
-body {
-    background: url(../img/login_bg.jpg) no-repeat bottom;
-    background-size: cover;
-}
-
-.panel {
+#login .panel {
     margin-top: 50px;
     border: 0;
     background: #fff;
@@ -20,7 +15,7 @@ body {
     animation-duration: 0.5s;
 }
 
-.panel-heading {
+#login .panel-heading {
     text-align: center;
     background: linear-gradient(#1A3D5A, #4D8CC3);
     border: 0;
@@ -29,15 +24,9 @@ body {
     text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.33);
 }
 
-.panel-heading h3 {
+#login .panel-heading h3 {
     font-size: 24px;
     margin-top: 15px;
-}
-
-footer {
-    margin-top: 0;
-    color: #FFF;
-    text-shadow: 0 0 3px #000;
 }
 
 @keyframes dropHeader {
