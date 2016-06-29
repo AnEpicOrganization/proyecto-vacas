@@ -1,6 +1,6 @@
 <panel-menu></panel-menu>
 
-<div class="container mtop" ng-controller="PanelController">
+<div class="container mtop" ng-controller="FichaController">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<button type="button" class="btn btn-success btn-xs pull-right" data-toggle="modal" href='#agregar'>
@@ -24,15 +24,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="ficha in fichas">
+					<tr ng-repeat="ficha in fichas track by ficha.diio">
 						<td>{{ficha.diio}}</td>
 						<td>{{ficha.descripcion}}</td>
 						<td><span class="text-muted">(no disponible)</span></td>
 						<td>(descripción breve del estado)</td>
 						<td>
-							<a type="button" class="btn btn-xs btn-primary" href="#/panel/fichas/{{ficha.diio}}">Ver</a>
-							<a type="button" class="btn btn-xs btn-primary" href="#/panel/fichas/{{ficha.diio}}/editar">Editar</a>
-							<button type="button" class="btn btn-xs btn-danger" onclick="confirm('¿Realmente quiere borrar la ficha?')">Borrar</button>
+							<a type="button" class="btn btn-xs btn-primary" href="#/panel/fichas/{{ficha.id_ficha}}">Ver</a>
+							<a type="button" class="btn btn-xs btn-primary" href="#/panel/fichas/{{ficha.id_ficha}}/editar">Editar</a>
+							<button type="button" class="btn btn-xs btn-danger" ng-click="delete(ficha.id_ficha)">Borrar</button>
 						</td>
 					</tr>
 				</tbody>
@@ -41,7 +41,7 @@
 	</div>
 
 	<div class="modal fade" id="agregar">
-		<form action="" method="POST" class="form-horizontal modal-dialog" role="form">
+		<form action="javascript:;" method="POST" class="form-horizontal modal-dialog" role="form" id="agregar-ficha" ng-submit="addSubmit()">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -51,7 +51,7 @@
 					<div class="form-group">
 						<label for="inputDiio" class="col-sm-2 control-label">DIIO:</label>
 						<div class="col-sm-10">
-							<input type="text" name="diio" id="inputDiio" class="form-control" value="" required="required" pattern="" title="">
+							<input type="text" name="diio" id="inputDiio" class="form-control" value="" required="required" title="">
 						</div>
 					</div>
 					<div class="form-group">
@@ -59,11 +59,11 @@
 						<div class="col-sm-10">
 							<div class="radio">
 								<label>
-									<input type="radio" name="sexo" id="sexo" value="" checked="checked">
+									<input type="radio" name="sexo" id="sexo" value="m" checked="checked">
 									Macho
 								</label>&nbsp;&nbsp;
 								<label>
-									<input type="radio" name="sexo" id="sexo" value="">
+									<input type="radio" name="sexo" id="sexo" value="h">
 									Hembra
 								</label>
 							</div>
@@ -92,7 +92,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-					<button type="button" class="btn btn-primary">Guardar cambios</button>
+					<input type="submit" class="btn btn-primary" value="Guardar cambios">
 				</div>
 			</div>
 		</form>

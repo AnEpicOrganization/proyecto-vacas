@@ -36,4 +36,46 @@ app.controller('FichaController', ['$scope', 'logged', 'ficha', function($scope,
 			$scope.fichas = data;
 		});
 	});
+
+	$scope.addSubmit = function() {
+		waitingDialog.show('Cargando...');
+		ficha.add().success(function(data){
+			waitingDialog.hide();
+			if('error' in data) {
+				alert('Error: ' + data.error);
+				return;
+			}
+
+			$scope.fichas.push(data);
+			$('#agregar').modal('hide');
+		});
+	};
+	$scope.delete = function(id) {
+		if(!confirm('Confirme eliminar ficha')) {
+			return;
+		}
+
+		waitingDialog.show('Cargando...');
+		ficha.delete(id).success(function(data) {
+			waitingDialog.hide();
+			if('error' in data) {
+				alert('Error: ' + data.error);
+				return;
+			}
+
+			if(!'success' in data) {
+				alert('Error desconocido.');
+				return;
+			}
+
+			for(var i = 0; i < $scope.fichas.length; i++) {
+				if($scope.fichas[i].id_ficha == id) {
+					$scope.fichas.splice(i, 1);
+					break;
+				}
+			}
+
+			alert(data.message);
+		});
+	}
 }]);
