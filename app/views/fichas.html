@@ -1,6 +1,6 @@
 <panel-menu></panel-menu>
 
-<div class="container mtop" ng-controller="FichaController">
+<div class="container mtop">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<button type="button" class="btn btn-success btn-xs pull-right" data-toggle="modal" href='#agregar'>
@@ -73,7 +73,7 @@
 						<label for="raza" class="col-sm-2 control-label">Raza</label>
 						<div class="col-sm-10">
 							<select id="raza" name="raza">
-								<option></option>
+								<option ng-repeat="raza in razas" value="{{raza}}">{{raza}}</option>
 							</select>
 						</div>
 					</div>
@@ -105,17 +105,3 @@
 
 <script type="text/javascript" src="assets/js/panel.js"></script>
 <script src="assets/js/chosen.jquery.min.js"></script>
-
-<script type="text/javascript">
-var razas = $('#raza');
-$.getJSON('assets/json/razas_vacas.json', function(d) {
-  for(var i = 0; i < d.length; i++) {
-    razas.append('<option>'+d[i]+'</option>');
-  }
-  razas.chosen({
-    width: '100%',
-    no_results_text: "¡No se encontró nada!",
-    placeholder_text_single: "Por favor seleccione una..."
-  });
-});
-</script>

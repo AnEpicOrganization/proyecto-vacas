@@ -22,9 +22,10 @@ app.controller('PanelController', ['$scope', 'logged', 'usuarios', function($sco
 	});
 }]);
 
-app.controller('FichaController', ['$scope', 'logged', 'ficha', '$routeParams', function($scope, logged, ficha, $routeParams) {
+app.controller('FichaController', ['$scope', 'logged', 'ficha', '$routeParams', '$timeout', function($scope, logged, ficha, $routeParams, $timeout) {
 	$scope.fichas = [];
 	$scope.ficha = null;
+	$scope.razas = [];
 
 	waitingDialog.show('Cargando...');
 	logged.success(function(isLogged){
@@ -87,11 +88,26 @@ app.controller('FichaController', ['$scope', 'logged', 'ficha', '$routeParams', 
 
 			alert(data.message);
 		});
-	}
+	};
+
+	
+	ficha.getRazas().success(function(d) {
+		$scope.razas = d;
+		
+		$timeout(function(){
+			$('#raza').chosen({
+				width: '100%',
+				no_results_text: "¡No se encontró nada!",
+				placeholder_text_single: "Por favor seleccione una..."
+			});
+		}, 0);
+		
+	});
 }]);
 
-app.controller('FichaEditController', ['$scope', 'logged', 'ficha', '$routeParams', function($scope, logged, ficha, $routeParams) {
+app.controller('FichaEditController', ['$scope', 'logged', 'ficha', '$routeParams', '$timeout', function($scope, logged, ficha, $routeParams, $timeout) {
 	$scope.ficha = null;
+	$scope.razas = [];
 
 	waitingDialog.show('Cargando...');
 	logged.success(function(isLogged){
@@ -116,12 +132,25 @@ app.controller('FichaEditController', ['$scope', 'logged', 'ficha', '$routeParam
 				return;
 			}
 
-			if(!'message' in data) {
+			if(!('message' in data)) {
 				alert('Error desconocido.');
 				return;
 			}
 
 			alert(data.message);
 		});
-	}
+	};
+
+	ficha.getRazas().success(function(d) {
+		$scope.razas = d;
+		
+		$timeout(function(){
+			$('#raza').chosen({
+				width: '100%',
+				no_results_text: "¡No se encontró nada!",
+				placeholder_text_single: "Por favor seleccione una..."
+			});
+		}, 0);
+		
+	});
 }]);

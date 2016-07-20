@@ -50,6 +50,10 @@ app.factory('ficha', ['$http', function($http) {
 			.error(function(data) {
 				return data;
 			});
+		},
+
+		getRazas: function() {
+			return $http.get('assets/json/razas_vacas.json');
 		}
-	}
+	};
 }]);
