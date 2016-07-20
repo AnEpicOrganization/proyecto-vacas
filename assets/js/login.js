@@ -3,24 +3,31 @@ function doLogin() {
 
 	$.post('app/api/session.php', $('#loginform').serialize(), function(data){
 		try {
-			data = JSON.parse(data);
+			if(typeof data == "string") {
+				data = JSON.parse(data);
+			}
+
 			if('error' in data) {
 				throw new Error(data.error);
 			}
 
-			if(!'logged' in data) {
-				throw new Error('Respuesta incorrecta recibida');
-			}
-
-			if(!!data.logged) {
-				location.hash = '/panel';
-			} else {
-				throw new Error('Combinación usuario-contraseña incorrecta');
-			}
 		} catch(err) {
-			alert('Error: ' + err.message);
 			waitingDialog.hide();
+			alert('Error: ' + err.message);
+			console.error(err);
+			console.log(data);
 			return;
+		}
+
+		if(!'logged' in data) {
+			alert('Error: Respuesta incorrecta recibida');
+			return;
+		}
+
+		if(!!data.logged) {
+			location.hash = '/panel';
+		} else {
+			alert('Errror: Combinación usuario-contraseña incorrecta');
 		}
 
 	});
